@@ -1,0 +1,14 @@
+## Proxy API and WebSocket to Render backend
+/api/*        https://horizons-backend.onrender.com/api/:splat     200
+/socket.io/*  https://horizons-backend.onrender.com/socket.io/:splat  200
+
+## SPA routes
+/admin/*   /admin/index.html   200
+/*   /index.html   200
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Referrer-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: blob:; media-src 'self' data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://missudsinhvien2025.online wss://missudsinhvien2025.online; font-src 'self' data:; frame-ancestors 'none'

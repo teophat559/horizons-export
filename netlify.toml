@@ -1,0 +1,18 @@
+# Netlify configuration for Vite + Functions
+
+[build]
+  command = "npm run build"
+  publish = "dist"       # public/_redirects will be copied here by Vite
+  functions = "netlify/functions"
+
+[dev]
+  command = "npm run dev"          # Start Vite dev server
+  targetPort = 5173                 # Vite dev server port
+  port = 8888                       # Netlify Dev proxy port
+  framework = "vite"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"         # Better ESM support
+
+# Do not define SPA fallback here; we use public/_redirects for redirects and headers.

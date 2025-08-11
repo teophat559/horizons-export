@@ -1,0 +1,12 @@
+{
+  "name": "scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:admin": "vite build",
+    "deploy:netlify": "npx netlify deploy --dir=public --prod",
+    "build:deploy": "npm run build:admin && npm run deploy:netlify",
+
+    "serve:functions": "node serve-functions.mjs"
+  }
+}

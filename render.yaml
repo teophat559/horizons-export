@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: horizons-backend
+    runtime: node
+    region: oregon
+    rootDir: backend
+    buildCommand: npm ci && npm run build || echo "no build step"
+    startCommand: node src/index.js
+    plan: free
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_KEY
+        value: <set-strong-admin-key>
+      - key: JWT_SECRET
+        value: <set-strong-jwt-secret>
+      - key: DATABASE_URL
+        value: <postgres-connection-string>
+      - key: ALLOWED_ORIGINS
+        value: https://admin.<your-domain>,https://<your-domain>

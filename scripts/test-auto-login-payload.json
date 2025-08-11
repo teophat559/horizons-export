@@ -1,0 +1,8 @@
+{
+  "account": "test@example.com",
+  "password": "examplePass123",
+  "platform": "google",
+  "chrome": "Default",
+  "note": "dry run test",
+  "dryRun": true
+}
