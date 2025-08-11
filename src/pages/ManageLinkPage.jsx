@@ -88,8 +88,8 @@ const ManageLinkPage = () => {
       <Helmet>
         <title>Quản Lý Link - Admin Dashboard</title>
       </Helmet>
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }} 
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="cyber-main-bg rounded-lg min-h-[calc(100vh-20px)]"
       >
@@ -101,13 +101,13 @@ const ManageLinkPage = () => {
             </div>
             <h2 className="text-center font-bold text-lg flex-1 text-white" style={{ textShadow: '0 0 8px rgba(138, 45, 226, 0.8)' }}>BẢNG ĐIỀU KHIỂN - QUẢN LÝ LINK</h2>
         </div>
-        
+
         <div className="p-4">
           <Card className="cyber-card-bg">
             <CardContent className="p-4">
               <div className="flex justify-between items-center mb-4">
                 <div className="relative w-full max-w-xs">
-                  <Input 
+                  <Input
                     type="text"
                     placeholder="Tìm kiếm link..."
                     value={searchTerm}
@@ -172,7 +172,7 @@ const ManageLinkPage = () => {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="platform" className="text-right text-slate-400">Nền tảng</Label>
-              <Input id="platform" value={newLink.platform} onChange={(e) => setNewLink({...newLink, platform: e.target.value})} className="col-span-3 bg-slate-800/50 border-slate-700" placeholder="VD: Facebook, Gmail" />
+                                <Input id="platform" value={newLink.platform} onChange={(e) => setNewLink({...newLink, platform: e.target.value})} className="col-span-3 bg-slate-800/50 border-slate-700" placeholder="VD: Facebook, Gmail, Mail khác" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="limit" className="text-right text-slate-400">Giới hạn</Label>

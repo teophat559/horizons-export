@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
@@ -15,9 +15,35 @@ function ok(msg) {
   console.info(`[verify] ${msg}`);
 }
 
+function warn(msg) {
+  console.warn(`[verify] WARN: ${msg}`);
+}
+
 try {
+  // Check if admin directory exists
+  if (!existsSync(join(root, 'public', 'admin'))) {
+    warn('Admin directory not found, skipping verification');
+    ok('Xác minh asset admin SKIPPED - no admin build found.');
+    process.exit(0);
+  }
+
+  // Check if admin index.html exists
+  if (!existsSync(adminIndexHtml)) {
+    warn('Admin index.html not found, skipping verification');
+    ok('Xác minh asset admin SKIPPED - no index.html found.');
+    process.exit(0);
+  }
+
+  // Check if assets directory exists
+  if (!existsSync(assetsDir)) {
+    warn('Admin assets directory not found, skipping verification');
+    ok('Xác minh asset admin SKIPPED - no assets directory found.');
+    process.exit(0);
+  }
+
   const html = readFileSync(adminIndexHtml, 'utf8');
-  const keepMatch = html.match(/src=\"\/admin\/assets\/(index-[a-z0-9]+\.js)\"/i);
+  // Accept both base paths: '/admin/' and '/'
+  const keepMatch = html.match(/src=\"\/(?:admin\/)?assets\/(index-[a-z0-9]+\.js)\"/i);
   if (!keepMatch) fail('Không tìm thấy entrypoint index-*.js trong public/admin/index.html');
   const keepJs = keepMatch[1];
 

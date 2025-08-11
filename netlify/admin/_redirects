@@ -1,0 +1,6 @@
+## Proxy API and WebSocket to backend
+/api/*        https://horizons-backend.onrender.com/api/:splat        200
+/socket.io/*  https://horizons-backend.onrender.com/socket.io/:splat  200
+
+## SPA fallback (standalone admin site)
+/*   /index.html   200

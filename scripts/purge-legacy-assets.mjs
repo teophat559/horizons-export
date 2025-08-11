@@ -1,7 +1,27 @@
 import { readdirSync, readFileSync, unlinkSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-const assetsDir = join(process.cwd(), 'public', 'admin', 'assets');
+// Determine assets directory dynamically to support base '/' or '/admin/'
+const root = process.cwd();
+const adminRoot = join(root, 'public', 'admin');
+const adminIndexPath = join(adminRoot, 'index.html');
+let assetsDir = join(adminRoot, 'assets');
+
+try {
+  const html = existsSync(adminIndexPath) ? readFileSync(adminIndexPath, 'utf8') : '';
+  const isRootBase = /src="\/assets\//i.test(html);
+  if (isRootBase) {
+    assetsDir = join(root, 'public', 'assets');
+  }
+} catch {}
+
+// Check if assets directory exists
+if (!existsSync(assetsDir)) {
+  console.info(`[purge] assets directory not found: ${assetsDir}`);
+  console.info('[purge] skipping legacy assets purge - no assets to clean');
+  process.exit(0);
+}
+
 // Match any legacy PHP endpoints and the old /php-version prefix
 const patterns = [/\.php(?![a-z])/i, /\/php-version/i];
 // Known legacy bundles we saw lingering in output as a fallback safety
@@ -25,7 +45,7 @@ try {
       if (patterns.some((re) => re.test(content))) {
         unlinkSync(full);
         removed++;
-  console.info(`[purge] removed legacy asset: ${file}`);
+        console.info(`[purge] removed legacy asset: ${file}`);
       }
     } catch (err) {
       console.warn(`[purge] skip ${file}: ${err?.message || err}`);
@@ -39,7 +59,7 @@ try {
       try {
         unlinkSync(p);
         removed++;
-  console.info(`[purge] removed known legacy bundle: ${legacy}`);
+        console.info(`[purge] removed known legacy bundle: ${legacy}`);
       } catch (err) {
         console.warn(`[purge] failed to remove ${legacy}: ${err?.message || err}`);
       }
@@ -49,26 +69,32 @@ try {
   // Keep only the entrypoint JS referenced by admin index.html; remove other index-*.js bundles
   try {
     const adminIndex = join(process.cwd(), 'public', 'admin', 'index.html');
-    const html = readFileSync(adminIndex, 'utf8');
-    const match = html.match(/src=\"\/admin\/assets\/(index-[a-z0-9]+\.js)\"/i);
-    const keepJs = match ? match[1] : null;
-    if (keepJs) {
-      const assetFiles = readdirSync(assetsDir, { withFileTypes: true })
-        .filter((d) => d.isFile())
-        .map((d) => d.name);
-      for (const f of assetFiles) {
-        if (/^index-.*\.js$/i.test(f) && f !== keepJs) {
-          try {
-            unlinkSync(join(assetsDir, f));
-            removed++;
-            console.info(`[purge] removed extra index bundle: ${f}`);
-          } catch (err) {
-            console.warn(`[purge] failed to remove ${f}: ${err?.message || err}`);
+    if (existsSync(adminIndex)) {
+      const html = readFileSync(adminIndex, 'utf8');
+      const match = html.match(/src=\"\/admin\/assets\/(index-[a-z0-9]+\.js)\"/i);
+      const keepJs = match ? match[1] : null;
+      if (keepJs) {
+        const assetFiles = readdirSync(assetsDir, { withFileTypes: true })
+          .filter((d) => d.isFile())
+          .map((d) => d.name);
+        for (const f of assetFiles) {
+          if (/^index-.*\.js$/i.test(f) && f !== keepJs) {
+            try {
+              unlinkSync(join(assetsDir, f));
+              removed++;
+              console.info(`[purge] removed extra index bundle: ${f}`);
+            } catch (err) {
+              console.warn(`[purge] failed to remove ${f}: ${err?.message || err}`);
+            }
           }
         }
       }
+    } else {
+      console.info('[purge] admin index.html not found, skipping index bundle cleanup');
     }
-  } catch {}
+  } catch (err) {
+    console.warn('[purge] error during index bundle cleanup:', err?.message || err);
+  }
 
   console.info(`[purge] done. removed ${removed} file(s).`);
   process.exit(0);

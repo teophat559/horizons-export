@@ -62,7 +62,7 @@ const WebSettingsPage = () => {
       [id]: type === 'number' ? Number(value) : value,
     }));
   };
-  
+
   const handleSwitchChange = (id, checked) => {
     setSettings(prev => ({
       ...prev,
@@ -127,8 +127,8 @@ const WebSettingsPage = () => {
       <Helmet>
         <title>Cài Đặt - BVOTE WEB</title>
       </Helmet>
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }} 
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="cyber-main-bg rounded-lg min-h-[calc(100vh-20px)]"
       >
@@ -145,7 +145,7 @@ const WebSettingsPage = () => {
               <Save className="mr-2 h-4 w-4" /> Lưu thay đổi
             </Button>
         </div>
-        
+
         <div className="p-4 space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Main Settings Column */}
@@ -206,7 +206,7 @@ const WebSettingsPage = () => {
                 <div className="border-t border-border pt-4 space-y-3">
                   <h4 className="text-md font-semibold text-white">{editingPlatformId ? 'Sửa nền tảng' : 'Thêm nền tảng mới'}</h4>
                   <div className="space-y-2">
-                    <Input name="name" value={newPlatform.name} onChange={handlePlatformChange} placeholder="Tên nền tảng (VD: Facebook)" className="bg-background border-border text-white" />
+                    <Input name="name" value={newPlatform.name} onChange={handlePlatformChange} placeholder="Tên nền tảng (VD: Facebook, Mail khác)" className="bg-background border-border text-white" />
                     <Input name="link" value={newPlatform.link} onChange={handlePlatformChange} placeholder="Link (VD: https://facebook.com)" className="bg-background border-border text-white" />
                   </div>
                   <div className="flex justify-end">

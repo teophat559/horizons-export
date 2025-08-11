@@ -1,6 +1,26 @@
 # Dependencies
 node_modules/
 
+# Extra locally-created folders that should not be committed
+node/
+npm/
+
+# Dev-only HTTP request files
+requests/*.http
+
+# Build timestamp artifacts and temporary files
+vite.config.js.timestamp*.mjs
+web-app@0.0.0
+
+# Stray folder/file created by mistake
+# (seen as '?? #' in git status)
+#
+# If this appears, ignore it
+#
+#/  
+# The above line may not match on Windows; ignore the literal name
+\#
+
 # Build outputs
 /dist
 /backend/uploads

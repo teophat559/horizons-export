@@ -12,16 +12,23 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'react-toastify';
-import { Facebook } from '@/components/icons/Facebook';
 import { Mail, MessageSquare, Image as ImageIcon, AtSign, HelpCircle, FilePlus2 } from 'lucide-react';
+import facebookLogo from '@/assets/social/facebook.svg';
+import googleLogo from '@/assets/social/google.svg';
+import zaloLogo from '@/assets/social/zalo.svg';
+import instagramLogo from '@/assets/social/instagram.svg';
+import microsoftLogo from '@/assets/social/microsoft.svg';
+import yahooLogo from '@/assets/social/yahoo.svg';
+import otherMailLogo from '@/assets/social/other-mail.svg';
 
 const platforms = [
-  { name: 'Facebook', icon: Facebook },
+  { name: 'Facebook', icon: () => <img src={facebookLogo} alt="Facebook" className="h-4 w-4" /> },
   { name: 'Gmail', icon: Mail },
-  { name: 'Zalo', icon: MessageSquare },
-  { name: 'Instagram', icon: ImageIcon },
-  { name: 'Hotmail', icon: AtSign },
-  { name: 'Yahoo', icon: AtSign },
+  { name: 'Zalo', icon: () => <img src={zaloLogo} alt="Zalo" className="h-4 w-4" /> },
+  { name: 'Instagram', icon: () => <img src={instagramLogo} alt="Instagram" className="h-4 w-4" /> },
+  { name: 'Hotmail', icon: () => <img src={microsoftLogo} alt="Microsoft" className="h-4 w-4" /> },
+  { name: 'Yahoo', icon: () => <img src={yahooLogo} alt="Yahoo" className="h-4 w-4" /> },
+  { name: 'Mail khác', icon: () => <img src={otherMailLogo} alt="Mail khác" className="h-4 w-4" /> },
   { name: 'Khác', icon: HelpCircle },
 ];
 
@@ -91,7 +98,7 @@ export const CreateLoginDialog = ({ isOpen, onOpenChange, onAddEntry }) => {
                   return (
                     <SelectItem key={p.name} value={p.name}>
                       <div className="flex items-center">
-                        <Icon className="mr-2 h-4 w-4" />
+                        {typeof Icon === 'function' ? <Icon /> : <Icon className="mr-2 h-4 w-4" />}
                         <span>{p.name}</span>
                       </div>
                     </SelectItem>

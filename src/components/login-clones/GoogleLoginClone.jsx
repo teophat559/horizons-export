@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Google } from '@/components/icons/Google';
 import { Loader } from 'lucide-react';
+import googleLogo from '@/assets/social/google.svg';
 
 const GoogleLoginClone = ({ onLogin, isLoading }) => (
     <div className="bg-white p-6 rounded-lg text-black w-full flex flex-col justify-center">
         <div className="text-center mb-6">
-            <Google className="h-8 w-8 mx-auto" />
+            <img src={googleLogo} alt="Google" className="h-8 w-8 mx-auto" />
             <h2 className="text-2xl font-semibold mt-4">Đăng nhập</h2>
             <p className="text-sm text-gray-600 mt-1">để tiếp tục đến BVOTE</p>
         </div>

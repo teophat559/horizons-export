@@ -2,13 +2,14 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader } from 'lucide-react';
+import facebookLogo from '@/assets/social/facebook.svg';
 
 const FacebookLoginClone = ({ onLogin, isLoading }) => (
     <div className="bg-white p-4 rounded-lg text-black w-full flex flex-col justify-center">
         <div className="p-4 bg-white border-none w-full">
             <form onSubmit={onLogin} className="space-y-3">
                 <div className="text-center mb-4">
-                    <h1 className="text-5xl font-bold text-blue-600">facebook</h1>
+                    <img src={facebookLogo} alt="Facebook" className="h-16 w-auto mx-auto" />
                 </div>
                 <div>
                     <Input

@@ -2,11 +2,12 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader } from 'lucide-react';
+import yahooLogo from '@/assets/social/yahoo.svg';
 
 const YahooLoginClone = ({ onLogin, isLoading }) => (
     <div className="bg-white p-6 rounded-lg text-black w-full flex flex-col justify-center">
         <div className="text-center mb-6">
-            <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/bd437477-89d8-41b6-a8e0-146e82a742d2/47d5195b0577712128919632863e4125.svg" alt="Yahoo" className="h-7 w-auto mx-auto"/>
+            <img src={yahooLogo} alt="Yahoo" className="h-7 w-auto mx-auto"/>
             <h2 className="text-xl font-semibold mt-4">Đăng nhập</h2>
             <p className="text-sm">sử dụng tài khoản Yahoo của bạn</p>
         </div>

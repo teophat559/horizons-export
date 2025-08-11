@@ -2,10 +2,11 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Loader } from 'lucide-react';
+import zaloLogo from '@/assets/social/zalo.svg';
 
 const ZaloLoginClone = ({ onLogin, isLoading }) => (
     <div className="bg-white p-6 rounded-lg text-black w-full text-center flex flex-col justify-center">
-         <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/bd437477-89d8-41b6-a8e0-146e82a742d2/37166e4a2e7c37107755a9b83b31b53f.svg" alt="Zalo" className="h-8 w-auto mx-auto mb-4" />
+         <img src={zaloLogo} alt="Zalo" className="h-8 w-auto mx-auto mb-4" />
         <h2 className="text-2xl font-semibold">Đăng nhập Zalo</h2>
         <p className="text-sm text-gray-500 mb-4">để kết nối với ứng dụng BVOTE</p>
          <form onSubmit={onLogin} className="space-y-4">

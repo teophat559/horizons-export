@@ -229,7 +229,7 @@ export default defineConfig({
 	},
 	build: {
 		outDir: OUT_DIR,
-		emptyOutDir: isAdminBuild ? true : undefined,
+		emptyOutDir: isAdminBuild && !process.env.SKIP_CLEAN ? true : false,
 		rollupOptions: {
 			external: [
 				'@babel/parser',

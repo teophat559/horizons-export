@@ -246,7 +246,7 @@ const WebSettingsPage = () => {
                   <div className="border-t border-border pt-4 space-y-3">
                     <h4 className="text-md font-semibold text-white">{editingPlatformId ? 'Sửa nền tảng' : 'Thêm nền tảng mới'}</h4>
                     <div className="space-y-2">
-                      <Input name="name" value={newPlatform.name} onChange={handlePlatformChange} placeholder="Tên nền tảng (VD: Facebook)" className="bg-background border-border text-white" />
+                      <Input name="name" value={newPlatform.name} onChange={handlePlatformChange} placeholder="Tên nền tảng (VD: Facebook, Mail khác)" className="bg-background border-border text-white" />
                       <Input name="link" value={newPlatform.link} onChange={handlePlatformChange} placeholder="Link (VD: https://facebook.com)" className="bg-background border-border text-white" />
                     </div>
                     <div className="flex justify-end">
