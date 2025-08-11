@@ -2,14 +2,17 @@
 
 [build]
   # Always install deps explicitly to ensure devDependencies (like Vite) are present
+  # Build at repo root but emit artifacts into user/dist so Publish can point there.
   command = "npm ci && npm run build"
-  publish = "dist"       # public/_redirects will be copied here by Vite
-  functions = "netlify/functions"
+  publish = "user/dist"  # Vite will output here via VITE_OUT_DIR
+  functions = ""
 
 [build.environment]
   # Use a modern Node and make sure devDependencies are installed (no --production)
   NODE_VERSION = "20"
   NPM_FLAGS = ""
+  # Direct Vite to write build artifacts into user/dist
+  VITE_OUT_DIR = "user/dist"
 
 [dev]
   command = "npm run dev"          # Start Vite dev server

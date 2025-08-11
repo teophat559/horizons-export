@@ -4,7 +4,7 @@ node_modules/
 # Build outputs
 /dist
 /backend/uploads
-/public/admin/assets/
+/public/admin/
 
 # Local emulator/build outputs
 .netlify/
