@@ -1,9 +1,10 @@
 # Netlify configuration for Vite + Functions
 
 [build]
-  # Always install deps explicitly to ensure devDependencies (like Vite) are present
-  # Build at repo root but emit artifacts into user/dist so Publish can point there.
-  command = "npm ci && npm run build"
+  # Always install deps explicitly to ensure devDependencies (like Vite) are present.
+  # Allow per-site build selection via BUILD_SCRIPT env (e.g. build, build:user:nix, build:admin:nix).
+  # If BUILD_SCRIPT is unset, default to "build".
+  command = "npm ci && if [ -n \"$BUILD_SCRIPT\" ]; then npm run \"$BUILD_SCRIPT\"; else npm run build; fi"
   # Do NOT hardcode publish for multi-site setups; set per-site in Netlify UI.
   # publish = "dist"
   functions = ""
