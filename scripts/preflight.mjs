@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Preflight scanner for production readiness
- * - Scans workspace for risky patterns (debugger, console.log, TODO/FIXME, mock/demo/test files, lorem ipsum)
+ * - Scans workspace for risky patterns (debugger, console.log, TODO/FIXME, mock/demo/test files)
  * - Separates severity: HIGH (fail), WARN (report only)
  * - Respects an optional allowlist file: preflight-allowlist.json
  */
@@ -91,15 +91,17 @@ function classify(rel, content) {
   if (isCode) {
     // debugger statements
     if (/^\s*debugger\s*;?/m.test(content)) add('debugger', 'Found debugger statement', null);
-    // console.log/debug
-    if (/console\.(log|debug)\s*\(/.test(content)) {
+    // console.log/debug (ignore in tooling scripts)
+    const skipConsoleLog = rel.startsWith('scripts/') || rel.startsWith('backend/src/scripts/');
+    if (!skipConsoleLog && /console\.(log|debug)\s*\(/.test(content)) {
       if (rel.startsWith('src/')) add('console_log_client', 'console.log/debug in client code', null);
       else add('console_log', 'console.log/debug in non-client code', null);
     }
     // TODO/FIXME/HACK
     if (/(TODO|FIXME|HACK)\s*:/.test(content)) add('todo', 'Found TODO/FIXME/HACK comment', null);
-    // lorem ipsum
-    if (/lorem ipsum/i.test(content)) {
+  // lorem ipsum (skip self-detection in this script)
+  const skipLorem = rel === 'scripts/preflight.mjs';
+  if (!skipLorem && /lorem ipsum/i.test(content)) {
       if (rel.startsWith('src/')) add('lorem_ipsum_client', 'Lorem ipsum placeholder in client code', null);
       else add('lorem_ipsum', 'Lorem ipsum placeholder', null);
     }

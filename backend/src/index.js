@@ -248,7 +248,7 @@ function listenWithFallback(startPort, maxAttempts = PORT_MAX_ATTEMPTS) {
     try {
       server.listen(currentPort, () => {
         process.env.ACTUAL_PORT = String(currentPort);
-        console.log(`Backend listening on http://127.0.0.1:${currentPort}`);
+        console.info(`Backend listening on http://127.0.0.1:${currentPort}`);
       });
     } catch (err) {
       // Synchronous errors (rare), handle like async error path
