@@ -1,9 +1,15 @@
 # Netlify configuration for Vite + Functions
 
 [build]
-  command = "npm run build"
+  # Always install deps explicitly to ensure devDependencies (like Vite) are present
+  command = "npm ci && npm run build"
   publish = "dist"       # public/_redirects will be copied here by Vite
   functions = "netlify/functions"
+
+[build.environment]
+  # Use a modern Node and make sure devDependencies are installed (no --production)
+  NODE_VERSION = "20"
+  NPM_FLAGS = ""
 
 [dev]
   command = "npm run dev"          # Start Vite dev server

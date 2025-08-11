@@ -6,14 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-  "preflight": "node scripts/preflight.mjs",
+    "preflight": "node scripts/preflight.mjs",
     "clean:admin": "node scripts/clean-admin.mjs",
     "purge:legacy": "node scripts/purge-legacy-assets.mjs",
-  "build:admin": "set BUILD_TARGET=admin&& npm run preflight && npm run clean:admin && vite build && node scripts/purge-legacy-assets.mjs && node scripts/verify-admin-assets.mjs",
-  "preview": "vite preview",
-
-  "deploy:netlify:admin": "scripts/deploy-admin-netlify.cmd",
-  "deploy:netlify:user": "scripts/deploy-user-netlify.cmd",
+    "build:admin": "set BUILD_TARGET=admin&& npm run preflight && npm run clean:admin && vite build && node scripts/purge-legacy-assets.mjs && node scripts/verify-admin-assets.mjs",
+    "preview": "vite preview",
+    "deploy:netlify:admin": "scripts/deploy-admin-netlify.cmd",
+    "deploy:netlify:user": "scripts/deploy-user-netlify.cmd",
     "backend:install": "npm install --prefix backend",
     "backend:dev": "npm run --prefix backend dev",
     "backend:start": "npm run --prefix backend start",
@@ -23,19 +22,17 @@
     "dev:all": "concurrently -n BACKEND,FRONTEND -c magenta,cyan \"npm:backend:dev\" \"npm:dev\"",
     "backend:dev:detached": "start \"backend\" cmd /c \"npm run --prefix backend dev\"",
     "e2e:smoke": "npm run backend:install && npm run backend:dev:detached && npm run -s wait:health && npm --prefix backend run -s e2e:smoke",
-  "e2e:vote": "npm run backend:install && npm run backend:dev:detached && npm run -s wait:health && node backend/src/scripts/e2e-vote.mjs",
+    "e2e:vote": "npm run backend:install && npm run backend:dev:detached && npm run -s wait:health && node backend/src/scripts/e2e-vote.mjs",
     "wait:health": "node backend/src/scripts/wait-health.mjs",
     "functions:dev": "node scripts/serve-functions.mjs",
     "functions:dev:8789": "set FN_PORT=8789&& node scripts/serve-functions.mjs",
     "dev:all:morelogin": "concurrently -n BACKEND,FUNCTIONS,FRONTEND -c magenta,yellow,cyan \"npm:backend:dev\" \"npm:functions:dev\" \"npm:dev\"",
     "dev:all:morelogin:8789": "concurrently -n BACKEND,FUNCTIONS,FRONTEND -c magenta,yellow,cyan \"npm:backend:dev\" \"npm:functions:dev:8789\" \"npm:dev\"",
     "dev:prepare-ports": "scripts/kill-port.cmd 4000 && scripts/kill-port.cmd 8788 && scripts/kill-port.cmd 8789 && exit /b 0",
-
-
-  "netlify:checklist": "node scripts/netlify-checklist.mjs",
+    "netlify:checklist": "node scripts/netlify-checklist.mjs",
     "setup:api:dev": "node scripts/setup-api.mjs --dev --memory-db true --run",
-  "setup:api:prod": "node scripts/setup-api.mjs --prod",
-  "git:push": "scripts/git-auto-push.cmd"
+    "setup:api:prod": "node scripts/setup-api.mjs --prod",
+    "git:push": "scripts/git-auto-push.cmd"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
@@ -80,6 +77,6 @@
     "eslint-config-react-app": "^7.0.1",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.3",
-    "vite": "^4.4.5"
+    "vite": "^4.5.14"
   }
 }
