@@ -64,7 +64,13 @@
     "netlify:checklist": "node scripts/netlify-checklist.mjs",
     "setup:api:dev": "node scripts/setup-api.mjs --dev --memory-db true --run",
     "setup:api:prod": "node scripts/setup-api.mjs --prod",
-    "git:push": "scripts/git-auto-push.cmd"
+    "git:push": "scripts/git-auto-push.cmd",
+    "setup:vps": "node scripts/setup-vps.mjs",
+    "deploy:vps": "node scripts/deploy-vps.mjs",
+    "deploy:vps:admin": "node scripts/deploy-vps.mjs --target=admin",
+    "deploy:vps:user": "node scripts/deploy-vps.mjs --target=user",
+    "deploy:vps:full": "node scripts/deploy-vps.mjs --target=admin && node scripts/deploy-vps.mjs --target=user",
+    "verify:vps": "node scripts/verify-vps.mjs"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
