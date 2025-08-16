@@ -1,0 +1,18 @@
+Converted this PR to Ready for review. Verification steps:
+
+Environment
+- Use Node >= 18.18
+
+Install
+- Remove old installs: rm -rf node_modules package-lock.json
+- Install fresh: npm install
+
+Lint
+- Run: npx eslint .
+- Expected: no fatal parser/config errors; lint warnings may appear depending on code.
+
+Dev/Build (smoke)
+- Dev (optional): npm run dev (should start without build errors)
+- Build: npm run build (should complete successfully)
+
+If this looks good locally (or in CI), reply here with "approve" and I will proceed to merge this PR first, then PR #4 (Vite 5).
