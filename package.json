@@ -64,7 +64,8 @@
     "netlify:checklist": "node scripts/netlify-checklist.mjs",
     "setup:api:dev": "node scripts/setup-api.mjs --dev --memory-db true --run",
     "setup:api:prod": "node scripts/setup-api.mjs --prod",
-    "git:push": "scripts/git-auto-push.cmd"
+    "git:push": "scripts/git-auto-push.cmd",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
@@ -105,10 +106,14 @@
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.16",
     "concurrently": "^8.2.2",
-    "eslint": "^8.57.1",
-    "eslint-config-react-app": "^7.0.1",
+    "eslint": "^9",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-jsx-a11y": "^6",
+    "eslint-plugin-react": "^7",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^15",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.3",
-    "vite": "^4.5.14"
+    "vite": "^5"
   }
 }
